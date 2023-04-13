@@ -1,51 +1,71 @@
 package org.example;
 
-import org.example.exEntrainement.Exo3h;
 import org.example.exClass.Rectangle;
 import org.example.exClass.Square;
+import org.example.exEntrainement.Exo3h;
+import org.example.exProg.controller.AccountController;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Path;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     static String textInput="Hello world!";
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void main(String[] args) throws IOException {
+
+        //Reverse phrase
+        System.out.println("Entrez une phrase: ");
+        Scanner scannerPhraseInput = new Scanner(System.in);
+        String phraseInput = scannerPhraseInput.nextLine();
+        System.out.println("Phrase reverse: " + reverseCaractString(phraseInput));
+
+        //pyramide
+        System.out.println("Entrez hauteur de pyramide: ");
+        Scanner scannerHeight = new Scanner(System.in);
+        int heightInput = scannerHeight.nextInt();
+        pyramideString(heightInput);
+
+        //Rectangles
+        System.out.println("----Rectangles---calcul d'aire---");
         Rectangle rectangle = new Rectangle(7,5);
         rectangle.display();
 
         Square square = new Square(11, 3);
         square.display();
-        System.out.println("Calcul d'aire: " + square.squareCalcul());
+        System.out.println("Calcul d'aire, x*y: " + square.squareCalcul());
 
-        //Exercices phrase
+        //Somme des nombres jusqu’à 10 000
+        System.out.println("Somme des nombres jusqu’à 10 000: " + calculSommeNbres(10000));
+
+        //Nombre Pair/impair/premier
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ecrire un nombre: ");
+        int nombre = scanner.nextInt();
+        System.out.println("Ce nombre " + nombre + " est "+ typeNombre(nombre)+ " et " + checkNbrePremier(nombre));
+
+        //Trouver nombre aleatoire
+        findrandomNumber();
+
+        //phrase : trouver le nombre de mots
         Scanner scannerPhrase = new Scanner(System.in);
         System.out.println("Ecrire une phrase: ");
-        String phraseInput = scannerPhrase.nextLine();
+        String phraseInput2 = scannerPhrase.nextLine();
 
-        Exo3h exo3h = new Exo3h(phraseInput);
+        Exo3h exo3h = new Exo3h(phraseInput2);
         System.out.println("Nombre de mots dans la phrase: " + exo3h.countWords(phraseInput));
+
+        //creation du fichier texte avec la phrase dedans
         exo3h.createTextFile();
 
+        //lire un fichier texte
         Scanner scannerReadFromFile = new Scanner(System.in);
         System.out.println("Chemin absolu du fichier texte a lire:");
         String pathTextFileInput = scannerReadFromFile.nextLine();
         exo3h.readTextFile(pathTextFileInput);
 
-        /*Scanner scanner = new Scanner(System.in);
-        System.out.println("Ecrire un nombre: ");
-
-        int nombre = scanner.nextInt();
-        System.out.println("Ce nombre " + nombre + " est "+ typeNombre(nombre)+ " et " + checkNbrePremier(nombre));
-
-        System.out.println("Input: " + textInput);
-        System.out.println("String reverse: " + reverseCaractString(textInput));
-        pyramideString(textInput);
-        System.out.println("Somme des nombres: " + calculSommeNbres(10000));
-        findNombreAleatoire();*/
+        AccountController customerController = new AccountController();
+        customerController.playMenu();
     }
 
     public static StringBuilder reverseCaractString(String textInput) {
@@ -53,14 +73,18 @@ public class Main {
         return textSB.reverse();
     }
 
-    public static void pyramideString(String textInput) {
-        String tableauString [] = new String[textInput.length()];
-        textInput = textInput.replaceAll("\\s", "");
+    public static void pyramideString(int height) {
         String textToPrint = "";
-        for(int i = 0; i < textInput.length(); i++) {
-            char charToPrint = textInput.charAt(i);
-            textToPrint = textToPrint + charToPrint;
-            System.out.println(textToPrint);
+        int countRepeatSpace = height;
+        for(int i = 1; i <= height; i++) {
+            countRepeatSpace--;
+            String spaceBeforeString = " ";
+            if (i==1){
+                textToPrint = "A";
+            } else {
+                textToPrint = textToPrint + "AA";
+            }
+            System.out.println(spaceBeforeString.repeat(countRepeatSpace) + textToPrint);
         }
     }
 
@@ -104,7 +128,7 @@ public class Main {
         return checkedNbrePremier;
     }
 
-    public static void findNombreAleatoire() {
+    public static void findrandomNumber() {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
         int nbreCoups = 1;
@@ -112,9 +136,9 @@ public class Main {
         int nbreAleatoire ;
         nbreAleatoire = random.nextInt(100); //borneInf+random.nextInt(borneSup-borneInf);
 
-        System.out.println("Ecrire un nombre entre 0 et 100: " + nbreAleatoire);
+        System.out.println("Ecrire un nombre entre 0 et 100: ");
         int nombreUser = scanner.nextInt();
-        while((nbreAleatoire != nombreUser) & ((nbreCoups-1) <= nbreCoupsMax)) {
+        while((nbreAleatoire != nombreUser) & ((nbreCoups) < nbreCoupsMax)) {
             nbreCoups = nbreCoups + 1;
             if (nombreUser < nbreAleatoire) {
                 System.out.println("Nombre trop petit");
@@ -124,7 +148,7 @@ public class Main {
 
             nombreUser = scanner.nextInt();
         }
-        if (nbreCoups > nbreCoupsMax){
+        if (nbreCoups >= nbreCoupsMax){
             System.out.println("Perdu! Tu as atteint le nombre max de coups!");
         } else {
             System.out.println("Bingo! Trouvé en "+nbreCoups+" coups!");

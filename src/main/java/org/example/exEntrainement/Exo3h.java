@@ -24,7 +24,7 @@ public class Exo3h {
         writer.println(phraseInput);
         writer.close();
 
-        System.out.println("Création du fichier terminée!");
+        System.out.println("Création du fichier terminée avec la phrase dedans!");
     }
 
     public void readTextFile(String stringPathTextFileInput) {
