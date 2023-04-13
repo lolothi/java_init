@@ -1,13 +1,41 @@
 package org.example;
 
+import org.example.exEntrainement.Exo3h;
+import org.example.exClass.Rectangle;
+import org.example.exClass.Square;
+
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     static String textInput="Hello world!";
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        Rectangle rectangle = new Rectangle(7,5);
+        rectangle.display();
+
+        Square square = new Square(11, 3);
+        square.display();
+        System.out.println("Calcul d'aire: " + square.squareCalcul());
+
+        //Exercices phrase
+        Scanner scannerPhrase = new Scanner(System.in);
+        System.out.println("Ecrire une phrase: ");
+        String phraseInput = scannerPhrase.nextLine();
+
+        Exo3h exo3h = new Exo3h(phraseInput);
+        System.out.println("Nombre de mots dans la phrase: " + exo3h.countWords(phraseInput));
+        exo3h.createTextFile();
+
+        Scanner scannerReadFromFile = new Scanner(System.in);
+        System.out.println("Chemin absolu du fichier texte a lire:");
+        String pathTextFileInput = scannerReadFromFile.nextLine();
+        exo3h.readTextFile(pathTextFileInput);
+
+        /*Scanner scanner = new Scanner(System.in);
         System.out.println("Ecrire un nombre: ");
 
         int nombre = scanner.nextInt();
@@ -17,7 +45,7 @@ public class Main {
         System.out.println("String reverse: " + reverseCaractString(textInput));
         pyramideString(textInput);
         System.out.println("Somme des nombres: " + calculSommeNbres(10000));
-        findNombreAleatoire();
+        findNombreAleatoire();*/
     }
 
     public static StringBuilder reverseCaractString(String textInput) {
@@ -86,7 +114,7 @@ public class Main {
 
         System.out.println("Ecrire un nombre entre 0 et 100: " + nbreAleatoire);
         int nombreUser = scanner.nextInt();
-        while((nbreAleatoire != nombreUser) & (nbreCoups <= nbreCoupsMax)) {
+        while((nbreAleatoire != nombreUser) & ((nbreCoups-1) <= nbreCoupsMax)) {
             nbreCoups = nbreCoups + 1;
             if (nombreUser < nbreAleatoire) {
                 System.out.println("Nombre trop petit");
