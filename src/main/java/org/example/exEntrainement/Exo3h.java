@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Exo3h {
     public String phraseInput;
 
-    public int countWords(String phraseUserInput){
+    public int countWordsInPhrase(String phraseUserInput){
         int count = 1;
         for(int i = 1; i < phraseUserInput.length(); i++) {
             if (phraseUserInput.charAt(i) == ' ' && phraseUserInput.charAt(i+1)!=' ')
@@ -23,7 +23,6 @@ public class Exo3h {
         PrintWriter writer = new PrintWriter("Files/TextFile.txt", "UTF-8");
         writer.println(phraseInput);
         writer.close();
-
         System.out.println("Création du fichier terminée avec la phrase dedans!");
     }
 
@@ -39,15 +38,15 @@ public class Exo3h {
             while(scanner.hasNextLine())
             {
                 String str = scanner.nextLine();
-                countWordsInFile = countWordsInFile + this.countWords(str);
+                countWordsInFile = countWordsInFile + this.countWordsInPhrase(str);
                 System.out.println(str);
             }
             System.out.println("Nombre de mots dans le fichier:" + countWordsInFile);
             scanner.close();
         }
-        catch(IOException e)
+        catch(FileNotFoundException e)
         {
-            e.printStackTrace();
+            System.out.println("Fichier texte non trouvé!");
         }
     }
 

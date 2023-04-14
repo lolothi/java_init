@@ -6,6 +6,7 @@ import org.example.exEntrainement.Exo3h;
 import org.example.exProg.controller.AccountController;
 
 import java.io.IOException;
+import java.util.IllegalFormatException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,13 +19,13 @@ public class Main {
         System.out.println("Entrez une phrase: ");
         Scanner scannerPhraseInput = new Scanner(System.in);
         String phraseInput = scannerPhraseInput.nextLine();
-        System.out.println("Phrase reverse: " + reverseCaractString(phraseInput));
+        System.out.println("Phrase reverse: " + reverseCharString(phraseInput));
 
         //pyramide
         System.out.println("Entrez hauteur de pyramide: ");
         Scanner scannerHeight = new Scanner(System.in);
         int heightInput = scannerHeight.nextInt();
-        pyramideString(heightInput);
+        pyramidString(heightInput);
 
         //Rectangles
         System.out.println("----Rectangles---calcul d'aire---");
@@ -36,16 +37,16 @@ public class Main {
         System.out.println("Calcul d'aire, x*y: " + square.squareCalcul());
 
         //Somme des nombres jusqu’à 10 000
-        System.out.println("Somme des nombres jusqu’à 10 000: " + calculSommeNbres(10000));
+        System.out.println("Somme des nombres jusqu’à 10 000: " + numberSum(10000));
 
         //Nombre Pair/impair/premier
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ecrire un nombre: ");
         int nombre = scanner.nextInt();
-        System.out.println("Ce nombre " + nombre + " est "+ typeNombre(nombre)+ " et " + checkNbrePremier(nombre));
+        System.out.println("Ce nombre " + nombre + " est "+ detailsNumber(nombre)+ " et " + checkFirstNumber(nombre));
 
         //Trouver nombre aleatoire
-        findrandomNumber();
+        findRandomNumber();
 
         //phrase : trouver le nombre de mots
         Scanner scannerPhrase = new Scanner(System.in);
@@ -53,7 +54,7 @@ public class Main {
         String phraseInput2 = scannerPhrase.nextLine();
 
         Exo3h exo3h = new Exo3h(phraseInput2);
-        System.out.println("Nombre de mots dans la phrase: " + exo3h.countWords(phraseInput));
+        System.out.println("Nombre de mots dans la phrase: " + exo3h.countWordsInPhrase(phraseInput));
 
         //creation du fichier texte avec la phrase dedans
         exo3h.createTextFile();
@@ -68,12 +69,12 @@ public class Main {
         customerController.playMenu();
     }
 
-    public static StringBuilder reverseCaractString(String textInput) {
+    public static StringBuilder reverseCharString(String textInput) {
         StringBuilder textSB = new StringBuilder(textInput);
         return textSB.reverse();
     }
 
-    public static void pyramideString(int height) {
+    public static void pyramidString(int height) {
         String textToPrint = "";
         int countRepeatSpace = height;
         for(int i = 1; i <= height; i++) {
@@ -88,33 +89,33 @@ public class Main {
         }
     }
 
-    public static int calculSommeNbres(int NombreInput){
-        int compteNombreInput = 0;
-        for(int i = 0; i <= NombreInput; i++){
-            compteNombreInput = compteNombreInput + i;
+    public static int numberSum(int inputNumber){
+        int countInputNumber = 0;
+        for(int i = 0; i <= inputNumber; i++){
+            countInputNumber = countInputNumber + i;
         }
-        return compteNombreInput;
+        return countInputNumber;
     }
 
-    public static String typeNombre(int NombreInput) {
-        String typeNombre = "";
-        if (NombreInput % 2 == 0) {
-            typeNombre = "pair";
+    public static String detailsNumber(int inputNumber) {
+        String detailsOfTheNumber = "";
+        if (inputNumber % 2 == 0) {
+            detailsOfTheNumber = "pair";
         }
         else {
-            typeNombre = "impair";
+            detailsOfTheNumber = "impair";
         }
-        return typeNombre;
+        return detailsOfTheNumber;
     }
 
-    public static String checkNbrePremier(int NombreInput) {
-        String checkedNbrePremier = "";
+    public static String checkFirstNumber(int inputNumber) {
+        String checkedFirstNumber = "";
         int reste;
         boolean flag = true;
 
-        for(int i=2; i <= NombreInput/2; i++)
+        for(int i=2; i <= inputNumber/2; i++)
         {
-            reste = NombreInput%i;
+            reste = inputNumber%i;
             if(reste == 0)
             {
                 flag = false;
@@ -122,39 +123,45 @@ public class Main {
             }
         }
         if(flag)
-            checkedNbrePremier = "est un nombre premier";
+            checkedFirstNumber = "est un nombre premier";
         else
-            checkedNbrePremier = "n'est pas un nombre premier";
-        return checkedNbrePremier;
+            checkedFirstNumber = "n'est pas un nombre premier";
+        return checkedFirstNumber;
     }
 
-    public static void findrandomNumber() {
+    public static void findRandomNumber() {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
-        int nbreCoups = 1;
-        int nbreCoupsMax = 10;
-        int nbreAleatoire ;
-        nbreAleatoire = random.nextInt(100); //borneInf+random.nextInt(borneSup-borneInf);
+        int countedTries = 1;
+        int maxCountedTries = 10;
+        int computerRandomNumber = 1 + random.nextInt(99); //borneInf+random.nextInt(borneSup-borneInf);
 
-        System.out.println("Ecrire un nombre entre 0 et 100: ");
-        int nombreUser = scanner.nextInt();
-        while((nbreAleatoire != nombreUser) & ((nbreCoups) < nbreCoupsMax)) {
-            nbreCoups = nbreCoups + 1;
-            if (nombreUser < nbreAleatoire) {
-                System.out.println("Nombre trop petit");
-            } else {
-                System.out.println("Nombre trop grand");
+        System.out.println("Devinez un nombre entre 1 et 100: ");
+        Integer userNumberInt = 0;
+
+        while((computerRandomNumber != userNumberInt) & ((countedTries) < maxCountedTries)) {
+            System.out.println("Tapez un nombre: ");
+            try{
+                String userNumber = scanner.nextLine();
+                userNumberInt = Integer.parseInt(userNumber);
+
+                countedTries = countedTries + 1;
+                if (userNumberInt < computerRandomNumber) {
+                    System.out.println("Nombre trop petit");
+                } else {
+                    System.out.println("Nombre trop grand");
+                }
             }
-
-            nombreUser = scanner.nextInt();
+            catch (NumberFormatException e){
+                System.out.println("Ceci n'est pas un nombre!");
+            }
         }
-        if (nbreCoups >= nbreCoupsMax){
+
+        if (countedTries >= maxCountedTries){
             System.out.println("Perdu! Tu as atteint le nombre max de coups!");
         } else {
-            System.out.println("Bingo! Trouvé en "+nbreCoups+" coups!");
+            System.out.println("Bingo! Trouvé en "+countedTries+" coups!");
         }
     }
-
-
 
 }
