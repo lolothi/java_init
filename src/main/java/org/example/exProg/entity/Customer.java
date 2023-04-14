@@ -13,7 +13,7 @@ public class Customer {
 
     public Customer(String lastname, int initialSold) {
         this.lastname = lastname;
-        account = new Account(0);
+        account = new Account(initialSold);
     }
 
     public int getSold() {

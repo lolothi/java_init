@@ -1,15 +1,11 @@
 package org.example;
 
-import org.example.exClass.Rectangle;
-import org.example.exClass.Square;
-import org.example.exEntrainement.Exo3h;
-import org.example.exProg.controller.AccountController;
+import org.example.exEntrainement.SingletonMemoryAddress;
+import org.example.exProg.controller.CustomerController;
 import org.example.exProg.entity.Customer;
-import org.example.exProg.repository.CustomerRepository;
 import org.example.exProg.services.CustomerService;
 
 import java.io.IOException;
-import java.util.IllegalFormatException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -78,8 +74,19 @@ public class Main {
         customerService1.takeMoney(30);
         System.out.println("Client 1: " + customer1.getFirstname() + " " + customer1.getLastname() + " " + customer1.getSold());
 
+        SingletonMemoryAddress singletonMemoryAddress = SingletonMemoryAddress.getlnstance();
+        singletonMemoryAddress.memoryAddress();
+        SingletonMemoryAddress singletonMemoryAddress2 = SingletonMemoryAddress.getlnstance();
+        SingletonMemoryAddress singletonMemoryAddress3 = SingletonMemoryAddress.getlnstance();
 
-        //customerController.playMenu();
+        if (singletonMemoryAddress == singletonMemoryAddress2 && singletonMemoryAddress2 == singletonMemoryAddress3) {
+            System.out.println("Singleton pattern fonctionne");
+        } else {
+            System.out.println("Singleton pattern oups");
+        }
+
+        CustomerController customerController = new CustomerController();
+        customerController.playMenu();
     }
 
     /**
