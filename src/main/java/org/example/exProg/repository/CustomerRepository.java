@@ -9,16 +9,19 @@ import java.util.UUID;
 
 public class CustomerRepository {
     FileWriter file = null;
-    final String pathfile = "ComptesBancaires.csv";
     JSONObject jsonObject = new JSONObject();
 
+    /**
+     * Write the Json file for the customers list
+     * @param customer
+     */
     public void writeJson(Customer customer) {
         String uniqueID = UUID.randomUUID().toString();
         jsonObject.put("name", customer.getLastname());
-        jsonObject.put("sold", customer.getLastname());
+        jsonObject.put("sold", customer.getSold());
         jsonObject.put("accountId", uniqueID);
         try{
-            FileWriter file = new FileWriter("Accounts.json", true);
+            FileWriter file = new FileWriter("Files/Accounts.json", true);
             file.write(jsonObject.toJSONString());
             file.close();
         } catch (IOException e) {

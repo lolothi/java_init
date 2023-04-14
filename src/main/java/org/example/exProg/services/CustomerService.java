@@ -13,18 +13,30 @@ public class CustomerService {
         this.customer = customer;
     }
 
+    /**
+     * Increase sold
+     * @param money
+     */
     public void addMoney(int money){
         int newSold = customer.getSold() + money ;
         customer.setSold(newSold);
     }
 
+    /**
+     * Send the new customer to the method for insertion in json file
+     * @param customer
+     */
+    public void insertCustomerInJsonFile(Customer customer){
+        customerRepository = new CustomerRepository();
+        customerRepository.writeJson(customer);
+    }
+
+    /**
+     * Decrease sold
+     * @param money
+     */
     public void takeMoney(int money){
         int newSold = customer.getSold() - money ;
         customer.setSold(newSold);
     }
-
-    public void createCustomer(Customer customer) {
-
-    }
-
 }

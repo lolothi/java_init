@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class CustomerController {
     Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Play hte menu for the customer CRUD (in progress)
+     * @throws IOException
+     */
     public void playMenu() throws IOException {
         System.out.println("--------MENU-------");
         System.out.println("1.Créer Client \n2.Trouver client\nVotre Choix?");
@@ -26,6 +31,10 @@ public class CustomerController {
         }
     }
 
+    /**
+     * Creation of the new customer
+     * @throws IOException
+     */
     public void createCustomer() throws IOException {
         Scanner scannerCreate = new Scanner(System.in);
         System.out.println("Nom nouveau client:");
@@ -35,7 +44,7 @@ public class CustomerController {
 
         Customer customer1 = new Customer(customerName, customerSold);
         CustomerService customerService1 = new CustomerService(customer1);
-
+        customerService1.insertCustomerInJsonFile(customer1);
         System.out.println("Client créé: " + customer1.getLastname() + " " + customer1.getSold());
 
         this.playMenu();

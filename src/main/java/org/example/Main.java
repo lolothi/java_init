@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.exClass.Rectangle;
+import org.example.exClass.Square;
+import org.example.exEntrainement.Exo3h;
 import org.example.exEntrainement.SingletonMemoryAddress;
 import org.example.exProg.controller.CustomerController;
 import org.example.exProg.entity.Customer;
@@ -13,7 +16,7 @@ public class Main {
     static String textInput="Hello world!";
 
     public static void main(String[] args) throws IOException {
-    /*
+
         //Reverse phrase
         System.out.println("Entrez une phrase: ");
         Scanner scannerPhraseInput = new Scanner(System.in);
@@ -48,12 +51,12 @@ public class Main {
         findRandomNumber();
 
         //phrase : trouver le nombre de mots
-        Scanner scannerPhrase = new Scanner(System.in);
+        Scanner scannerPhrase2 = new Scanner(System.in);
         System.out.println("Ecrire une phrase: ");
-        String phraseInput2 = scannerPhrase.nextLine();
+        String phraseInput2 = scannerPhrase2.nextLine();
 
         Exo3h exo3h = new Exo3h(phraseInput2);
-        System.out.println("Nombre de mots dans la phrase: " + exo3h.countWordsInPhrase(phraseInput));
+        System.out.println("Nombre de mots dans la phrase: " + exo3h.countWordsInPhrase(phraseInput2));
 
         //creation du fichier texte avec la phrase dedans
         exo3h.createTextFile();
@@ -63,7 +66,7 @@ public class Main {
         System.out.println("Chemin absolu du fichier texte a lire:");
         String pathTextFileInput = scannerReadFromFile.nextLine();
         exo3h.readTextFile(pathTextFileInput);
-    */
+
         //Compte bancaire, jeu de class
         Customer customer1 = new Customer("Dupont", 100);
         CustomerService customerService1 = new CustomerService(customer1);
@@ -190,7 +193,7 @@ public class Main {
                 countedTries = countedTries + 1;
                 if (userNumberInt < computerRandomNumber) {
                     System.out.println("Nombre trop petit");
-                } else {
+                } else if (userNumberInt > computerRandomNumber){
                     System.out.println("Nombre trop grand");
                 }
             }
@@ -200,7 +203,7 @@ public class Main {
         }
 
         if (countedTries >= maxCountedTries){
-            System.out.println("Perdu! Tu as atteint le nombre max de coups!");
+            System.out.println("Perdu! Tu as atteint le nombre max de coups, le nombre était " + computerRandomNumber);
         } else {
             System.out.println("Bingo! Trouvé en "+countedTries+" coups!");
         }
