@@ -10,7 +10,7 @@ public class AccountController {
     Scanner scanner = new Scanner(System.in);
 
     AccountService accountService = new AccountService();
-
+/*
     public void playMenu() throws IOException {
         System.out.println("--------MENU-------");
         System.out.println("1.Créer Client \n2.Trouver client\nVotre Choix?");
@@ -29,6 +29,7 @@ public class AccountController {
         }
     }
 
+
     public void createAccount() throws IOException {
         Scanner scannerCreate = new Scanner(System.in);
         Account account = new Account();
@@ -42,5 +43,6 @@ public class AccountController {
         this.playMenu();
 
     }
+    */
 
 }

@@ -1,20 +1,26 @@
 package org.example.exProg.entity;
 
+import org.example.exProg.services.CustomerService;
+
 public class Customer {
-    private int Id;
     private String firstname;
     private String lastname;
     private String email;
 
-    public Customer() {
+    private Account account;
+    private CustomerService customerService;
+
+
+    public Customer(String lastname, int initialSold) {
+        this.lastname = lastname;
+        account = new Account(0);
     }
 
-    public int getId() {
-        return Id;
+    public int getSold() {
+        return account.getSold();
     }
-
-    public void setId(int id) {
-        Id = id;
+    public void setSold(int newSold) {
+        account.setSold(newSold);
     }
 
     public String getFirstname() {

@@ -4,6 +4,9 @@ import org.example.exClass.Rectangle;
 import org.example.exClass.Square;
 import org.example.exEntrainement.Exo3h;
 import org.example.exProg.controller.AccountController;
+import org.example.exProg.entity.Customer;
+import org.example.exProg.repository.CustomerRepository;
+import org.example.exProg.services.CustomerService;
 
 import java.io.IOException;
 import java.util.IllegalFormatException;
@@ -14,7 +17,7 @@ public class Main {
     static String textInput="Hello world!";
 
     public static void main(String[] args) throws IOException {
-
+    /*
         //Reverse phrase
         System.out.println("Entrez une phrase: ");
         Scanner scannerPhraseInput = new Scanner(System.in);
@@ -64,16 +67,35 @@ public class Main {
         System.out.println("Chemin absolu du fichier texte a lire:");
         String pathTextFileInput = scannerReadFromFile.nextLine();
         exo3h.readTextFile(pathTextFileInput);
+    */
+        //Compte bancaire, jeu de class
+        Customer customer1 = new Customer("Dupont", 100);
+        CustomerService customerService1 = new CustomerService(customer1);
+        customer1.setEmail("lolo@ipi.net");
+        customer1.setFirstname("Laurent");
+        System.out.println("Client 1: " + customer1.getFirstname() + " " + customer1.getLastname() + " " + customer1.getSold());
+        customerService1.addMoney(540);
+        customerService1.takeMoney(30);
+        System.out.println("Client 1: " + customer1.getFirstname() + " " + customer1.getLastname() + " " + customer1.getSold());
 
-        AccountController customerController = new AccountController();
-        customerController.playMenu();
+
+        //customerController.playMenu();
     }
 
+    /**
+     * Reverse the chart of an input string
+     * @param textInput
+     * @return
+     */
     public static StringBuilder reverseCharString(String textInput) {
         StringBuilder textSB = new StringBuilder(textInput);
         return textSB.reverse();
     }
 
+    /**
+     * Create a pyramid of "A" where 1 level = 1 height
+     * @param height
+     */
     public static void pyramidString(int height) {
         String textToPrint = "";
         int countRepeatSpace = height;
@@ -89,6 +111,11 @@ public class Main {
         }
     }
 
+    /**
+     * Sum of the numbers from a number
+     * @param inputNumber
+     * @return
+     */
     public static int numberSum(int inputNumber){
         int countInputNumber = 0;
         for(int i = 0; i <= inputNumber; i++){
@@ -97,6 +124,11 @@ public class Main {
         return countInputNumber;
     }
 
+    /**
+     * Check if a number is even or not, and if it is a first number
+     * @param inputNumber
+     * @return
+     */
     public static String detailsNumber(int inputNumber) {
         String detailsOfTheNumber = "";
         if (inputNumber % 2 == 0) {
@@ -108,7 +140,7 @@ public class Main {
         return detailsOfTheNumber;
     }
 
-    public static String checkFirstNumber(int inputNumber) {
+    private static String checkFirstNumber(int inputNumber) {
         String checkedFirstNumber = "";
         int reste;
         boolean flag = true;
@@ -129,6 +161,9 @@ public class Main {
         return checkedFirstNumber;
     }
 
+    /**
+     * Little game for the user to find a random number
+     */
     public static void findRandomNumber() {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);

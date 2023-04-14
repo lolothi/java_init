@@ -12,6 +12,7 @@ public class AccountRepository {
     final String pathfile = "ComptesBancaires.csv";
     JSONObject jsonObject = new JSONObject();
 
+    /*
     public void writeJson(Account account) {
         String uniqueID = UUID.randomUUID().toString();
         jsonObject.put("name", account.getName());
@@ -26,6 +27,7 @@ public class AccountRepository {
         }
 
     }
+
 
     public String writeCSV(Account account) throws IOException {
         String uniqueID = UUID.randomUUID().toString();
@@ -80,6 +82,6 @@ public class AccountRepository {
             e.printStackTrace();
         }
     }
-
+ */
 
 }
